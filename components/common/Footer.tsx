@@ -1,9 +1,22 @@
-type Props = {}
+"use client";
 
-const Footer = (props: Props) => {
+import { Box, Typography } from "@mui/material";
+
+export default function Footer() {
   return (
-    <div>Footer</div>
-  )
-};
-
-export default Footer;
+    <Box
+      component="footer"
+      sx={{
+        bgcolor: "primary.main",
+        color: "white",
+        textAlign: "center",
+        py: 3,
+        mt: 6,
+      }}
+    >
+      <Typography variant="body2">
+        © {new Date().getFullYear()} MyShop. All rights reserved.
+      </Typography>
+    </Box>
+  );
+}

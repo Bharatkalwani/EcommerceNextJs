@@ -5,9 +5,7 @@ export default function MainLayout(
   return (
     <html lang="en">
       <body>
-        <main>
           {children}
-        </main>
       </body>
     </html>
   );

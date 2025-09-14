@@ -1,5 +1,7 @@
 import "./globals.css";
 import type { Metadata } from "next";
+import Header from "@/components/common/Header";
+import Footer from "@/components/common/Footer";
 
 export const metadata: Metadata = {
   title: "Ecommerce Frontend",
@@ -13,9 +15,9 @@ export default function RootLayout(
   return (
     <html lang="en">
       <body>
-        <main>
+          <Header></Header>
           {children}
-        </main>
+          <Footer></Footer>
       </body>
     </html>
   );
