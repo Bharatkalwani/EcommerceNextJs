@@ -1,14 +1,13 @@
 "use client";
 
-import AppBar from "@mui/material/AppBar";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
-import IconButton from "@mui/material/IconButton";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import Link from "next/link";
-import { Box, Button } from "@mui/material";
+import { Box, Button, Typography, AppBar, Toolbar, IconButton, Badge } from "@mui/material";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store/store";
 
 export default function Header() {
+  const items = useSelector((state: RootState) => state.cart.items)
   return (
     <AppBar position="static">
       <Toolbar>
@@ -22,13 +21,16 @@ export default function Header() {
         </Typography>
 
         <Box sx={{ display: "flex", gap: 2 }}>
-          <Button color="inherit" component={Link} href="/">
-            Home
-          </Button>
           <IconButton color="inherit" component={Link} href="/cart">
-            <ShoppingCartIcon /> 
-           <Typography>Cart</Typography>
+            <Badge badgeContent={items.length} color="error">
+
+              <ShoppingCartIcon />
+            </Badge>
+            <Typography>Cart</Typography>
           </IconButton>
+          <Button color="inherit" component={Link} href="/login">
+            Logout
+          </Button>
         </Box>
       </Toolbar>
     </AppBar>

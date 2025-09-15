@@ -2,7 +2,9 @@
 
 import { products } from '../../lib/products'
 import ProductCard from '../../components/main/ProductCard';
+
 import { Grid, Container } from "@mui/material";
+import Link from 'next/link';
 
 export default function HomePage() {
     return (
@@ -11,7 +13,7 @@ export default function HomePage() {
                 {
                     products.map((item) => (
                           <Grid key={item.id} size={{ xs: 12, sm: 6, md: 4 }}>
-                            <ProductCard product={item} />
+                        <Link key ={item.id} href={`/products/${item.id}`}><ProductCard product={item} /></Link>
                         </Grid>
                     ))
                 }
