@@ -2,6 +2,8 @@
 import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { registerUser } from "@/lib/api";
+
 
 export default function RegisterPage() {
   const [name,setName] = useState("")
@@ -9,8 +11,10 @@ export default function RegisterPage() {
   const [password,setPassword] = useState("")
   const router = useRouter();
 
-const handleSubmit =()=>{
+const handleSubmit =async()=>{
 console.log(name,email,password)
+   const data= await  registerUser({name,email,password})
+       localStorage.setItem("token", data.token);
 router.push("/")
 }
 
