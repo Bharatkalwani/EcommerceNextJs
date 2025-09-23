@@ -6,17 +6,17 @@ import { registerUser } from "@/lib/api";
 
 
 export default function RegisterPage() {
-  const [name,setName] = useState("")
-  const [email,setEmail] = useState("")
-  const [password,setPassword] = useState("")
+  const [name, setName] = useState("")
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
   const router = useRouter();
 
-const handleSubmit =async()=>{
-console.log(name,email,password)
-   const data= await  registerUser({name,email,password})
-       localStorage.setItem("token", data.token);
-router.push("/")
-}
+  const handleSubmit = async () => {
+    console.log(name, email, password)
+    const data = await registerUser({ name, email, password })
+    localStorage.setItem("token", data.token);
+    router.push("/")
+  }
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-sky-100">
@@ -28,34 +28,34 @@ router.push("/")
               type="text"
               placeholder="Full Name"
               className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-              value ={name}
-              onChange={(e)=>setName(e.target.value)}
-          />
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
           </div>
           <div>
             <input
               type="email"
               placeholder="Email"
               className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-              value ={email}
-              onChange={(e)=>setEmail(e.target.value)}
-           />
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
           </div>
           <div>
             <input
               type="password"
               placeholder="Password"
               className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-              value ={password}
-              onChange={(e)=>setPassword(e.target.value)}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
           </div>
           <div className="flex justify-between items-center text-sm">
             <button
               type="submit"
               className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition"
-             onClick={handleSubmit}
-           >
+              onClick={handleSubmit}
+            >
               Register
             </button>
           </div>

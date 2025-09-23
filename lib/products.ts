@@ -140,3 +140,4 @@ export const products = [
     description: "High-performance laptop built for gaming."
   }
 ];
+  

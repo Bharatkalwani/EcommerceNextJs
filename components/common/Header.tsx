@@ -28,6 +28,9 @@ export default function Header() {
             </Badge>
             <Typography>Cart</Typography>
           </IconButton>
+             <Button color="inherit" component={Link} href="/admin">
+            Admin
+          </Button>
           <Button color="inherit" component={Link} href="/login">
             Logout
           </Button>

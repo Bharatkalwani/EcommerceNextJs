@@ -1,13 +1,24 @@
 "use client";
 
-import { products } from '../../lib/products'
 import ProductCard from '../../components/main/ProductCard';
-
 import { Grid, Container } from "@mui/material";
 import Link from 'next/link';
+import { useEffect, useState } from "react";
+import { getAllProducts } from '@/lib/api';
+import { Product } from '@/types';
 
 export default function HomePage() {
+  const [products, setProducts] = useState<Product[]>([]);
+      useEffect(() => {
+        const fetchData = async () => {
+          let getProducts = await getAllProducts()
+          setProducts(getProducts.products)
+        }
+        fetchData()
+    
+      }, []);
     return (
+        
         <Container sx={{ py: 4,px: 2 }}>
             <Grid container spacing={4}>
                 {

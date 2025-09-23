@@ -11,7 +11,7 @@ const ProductCard = ({product}: {product:Product}) => {
     <Card sx={{ maxWidth: 345 }}>
       <CardMedia
         sx={{ height: 140 }}
-        image={product.image}
+        image={product.productUrl}
         title="green iguana"
       />
       <CardContent>
