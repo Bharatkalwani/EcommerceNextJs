@@ -5,6 +5,7 @@ import { RootState, AppDispatch } from "../../../store/store";
 import { addToCart,decreaseQuantity,removeItem,clearCart} from "../../../store/cartSlice";
 import { Box, Button, Typography, Card, CardContent, Grid } from "@mui/material";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 export default function CartPage() {
     const router = useRouter();
@@ -20,6 +21,7 @@ export default function CartPage() {
     //clear the cart
     dispatch(clearCart())
     router.push("/")
+        toast.success("Order Placed Successfully!");
   }
 
   return (

@@ -2,12 +2,13 @@
 
 import { useEffect, useState } from "react";
 import { Box, Typography, Button, IconButton, Paper, Stack, Pagination } from "@mui/material";
-import { getAllProducts,deleteProductById } from "@/lib/api";
+import { getAllProducts, deleteProductById } from "@/lib/api";
 import { useRouter } from "next/navigation";
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Product } from "@/types";
+import toast from "react-hot-toast";
 
 
 export default function AdminProductsPage() {
@@ -15,26 +16,28 @@ export default function AdminProductsPage() {
   const [products, setProducts] = useState<Product[]>([]);
   const [page, setPage] = useState(1); // current page
   const [totalCount, setTotalCount] = useState(0);
-  const pageSize = 10; 
+  const pageSize = 10;
 
 
   const fetchData = async (pageNo: number) => {
     let getProducts = await getAllProducts(pageNo, pageSize)
-     setTotalCount(getProducts.data.pagination.total)
+    setTotalCount(getProducts.data.pagination.total)
     setProducts(getProducts.data.products)
   }
   useEffect(() => {
 
     fetchData(page)
+    toast.success("Products Fetched Successfully!");
 
-  }, [page,totalCount]);
+  }, [page, totalCount]);
 
-    const handlePageChange = (_event: React.ChangeEvent<unknown>, value: number) => {
-    setPage(value); 
+  const handlePageChange = (_event: React.ChangeEvent<unknown>, value: number) => {
+    setPage(value);
   }
 
   const handleAddProduct = () => {
     router.push("/admin/products/add")
+         toast.success("Product Added Successfully!");
   }
 
   const handleEdit = (id: number) => {
@@ -42,10 +45,11 @@ export default function AdminProductsPage() {
   };
 
   const handleDelete = async (id: string) => {
-    console.log("data",id)
     if (!confirm("Are you sure you want to delete this product?")) return;
-     await deleteProductById(id);
-     setProducts((prev) => prev.filter((p) => p.id !== id));
+    await deleteProductById(id);
+    setProducts((prev) => prev.filter((p) => p.id !== id));
+      //  toast.error("Product Deleted!");
+      toast.success("Product Deleted!");
   };
 
   const columns: GridColDef[] = [
@@ -107,9 +111,9 @@ export default function AdminProductsPage() {
       </Paper>
       <Stack spacing={2} direction="row" justifyContent="center">
         <Pagination
-          count={Math.ceil(totalCount/ pageSize)} // total pages
+          count={Math.ceil(totalCount / pageSize)} // total pages
           page={page}
-           onChange={handlePageChange}
+          onChange={handlePageChange}
           color="primary"
         />
       </Stack>

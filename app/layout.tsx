@@ -1,6 +1,7 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import ReduxProvider from "../store/ReduxProvider";
+import { Toaster } from "react-hot-toast";
 
 export const metadata: Metadata = {
   title: "Ecommerce Frontend",
@@ -16,6 +17,7 @@ export default function RootLayout({
     <html lang="en">
   <body>
         <ReduxProvider>{children}</ReduxProvider>
+          <Toaster position="top-right" reverseOrder={false} />
       </body>
     </html>
   );

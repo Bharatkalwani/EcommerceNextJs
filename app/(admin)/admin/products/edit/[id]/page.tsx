@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { TextField, Button, Box, Typography } from "@mui/material";
 import { getProductById, updateProductById } from "@/lib/api";
+import toast from "react-hot-toast";
 
 // Example Product type (adjust fields as per your DB schema)
 interface Product {
@@ -51,10 +52,12 @@ export default function EditProductPage() {
 
         try {
             await updateProductById(id, product)
-            router.push("/admin/products"); // Redirect back to list
+            router.push("/admin/products");
+            toast.success("Product Updated!");
         } catch (err) {
             console.error("Update failed", err);
-            alert("Failed to update product");
+            // alert("Failed to update product");
+            toast.error("Failed to update product!");
         }
     };
 
@@ -99,7 +102,7 @@ export default function EditProductPage() {
                 />
 
                 <Button type="submit" variant="contained" color="primary" sx={{ mt: 2 }}>
-                    Save Changes
+                    Update
                 </Button>
             </form>
         </Box>

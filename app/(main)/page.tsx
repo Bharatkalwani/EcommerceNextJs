@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { useEffect, useState } from "react";
 import { getAllProducts } from '@/lib/api';
 import { Product } from '@/types';
+import toast from "react-hot-toast";
 
 export default function HomePage() {
   const [products, setProducts] = useState<Product[]>([]);
@@ -13,6 +14,7 @@ export default function HomePage() {
         const fetchData = async () => {
           let getProducts = await getAllProducts()
           setProducts(getProducts.data.products)
+           toast.success("Product fetched successfully!");
         }
         fetchData()
     
