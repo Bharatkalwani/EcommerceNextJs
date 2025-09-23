@@ -12,7 +12,7 @@ export default function HomePage() {
       useEffect(() => {
         const fetchData = async () => {
           let getProducts = await getAllProducts()
-          setProducts(getProducts.products)
+          setProducts(getProducts.data.products)
         }
         fetchData()
     

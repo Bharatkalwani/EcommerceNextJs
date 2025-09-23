@@ -12,7 +12,6 @@ export default function RegisterPage() {
   const router = useRouter();
 
   const handleSubmit = async () => {
-    console.log(name, email, password)
     const data = await registerUser({ name, email, password })
     localStorage.setItem("token", data.token);
     router.push("/")

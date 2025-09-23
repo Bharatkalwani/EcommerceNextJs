@@ -27,8 +27,14 @@ reducers:{
         existing.quantity -= 1;
       }
     },
+    removeItem:(state,action:PayloadAction<string>)=>{
+      state.items = state.items.filter((item) => item.id != action.payload);
+    },
+       clearCart:(state)=>{
+      state.items = []
+    },
 }
 })
 
-export const { addToCart,decreaseQuantity } = cartSlice.actions;
+export const { addToCart,decreaseQuantity,removeItem ,clearCart} = cartSlice.actions;
 export default cartSlice.reducer;

@@ -11,7 +11,6 @@ const API = axios.create({
 // ✅ Automatically attach token if present
 API.interceptors.request.use((config) => {
   const token = localStorage.getItem("token"); // your JWT token saved at login
- console.log("token fetch")
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }
@@ -37,12 +36,16 @@ export const addProduct = async (data: any) => {
 
 export const getAllProducts = async (page:number =1,limit:number=10) => {
   const response = await API.get(`/products?page=${page}&limit=${limit}`);
-  console.log("data",response.data)
   return response.data;
 };
 
 export const getProductById = async (id:any) => {
   const response = await API.get(`/products/${id}`);
+  return response.data;
+};
+
+export const updateProductById = async (id:any,data:any) => {
+  const response = await API.put(`/products/${id}`,data);
   return response.data;
 };
 

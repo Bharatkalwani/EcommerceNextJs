@@ -23,8 +23,8 @@ const page = () => {
     useEffect(() => {
         const fetchData = async () => {
                const id = params?.id as string | undefined;
-            const data = await getProductById(id)
-            setProduct(data)
+            const getProduct = await getProductById(id)
+            setProduct(getProduct.data)
 
         }
         fetchData()

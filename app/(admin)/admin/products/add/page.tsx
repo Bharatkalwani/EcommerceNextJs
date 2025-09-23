@@ -24,7 +24,6 @@ const page = () => {
 
     const handleSubmit = async(e: React.FormEvent<HTMLFormElement>) => {
          e.preventDefault();  
-           console.log("add",formData)
           let saveProduct =await addProduct(formData)
           console.group("saveProduct",saveProduct)
       

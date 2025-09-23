@@ -2,10 +2,12 @@
 
 import { useSelector, useDispatch } from "react-redux";
 import { RootState, AppDispatch } from "../../../store/store";
-import { addToCart,decreaseQuantity} from "../../../store/cartSlice";
+import { addToCart,decreaseQuantity,removeItem,clearCart} from "../../../store/cartSlice";
 import { Box, Button, Typography, Card, CardContent, Grid } from "@mui/material";
+import { useRouter } from "next/navigation";
 
 export default function CartPage() {
+    const router = useRouter();
   const cartItems =useSelector((state:RootState)=>state.cart.items)
   const dispatch = useDispatch<AppDispatch>();
 
@@ -13,6 +15,12 @@ export default function CartPage() {
     (total, item) => Math.round(total + item.price * item.quantity),
     0
   );
+
+  const handleCheckout =()=>{
+    //clear the cart
+    dispatch(clearCart())
+    router.push("/")
+  }
 
   return (
     <Box display="flex" gap={4} p={4}>
@@ -49,7 +57,7 @@ export default function CartPage() {
 
                   <Button
                     color="error"
-                    // onClick={() => dispatch(removeFromCart(item.id))}
+                     onClick={() => dispatch(removeItem(item.id))}
                   >Remove</Button>
                 </CardContent>
               </Card>
@@ -69,6 +77,7 @@ export default function CartPage() {
           variant="contained"
           color="primary"
           sx={{ mt: 3 }}
+          onClick={handleCheckout}
         >
           Checkout
         </Button>

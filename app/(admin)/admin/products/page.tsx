@@ -20,8 +20,8 @@ export default function AdminProductsPage() {
 
   const fetchData = async (pageNo: number) => {
     let getProducts = await getAllProducts(pageNo, pageSize)
-     setTotalCount(getProducts.pagination.total)
-    setProducts(getProducts.products)
+     setTotalCount(getProducts.data.pagination.total)
+    setProducts(getProducts.data.products)
   }
   useEffect(() => {
 

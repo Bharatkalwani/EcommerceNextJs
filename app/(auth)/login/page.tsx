@@ -11,7 +11,6 @@ export default function page() {
     const router = useRouter();
 
     const handleSubmit = async() => {
-        console.log(email, password)
         const data= await  loginUser({email,password})
        localStorage.setItem("token", data.token);
         router.push("/")
