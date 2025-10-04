@@ -34,8 +34,8 @@ export const addProduct = async (data: any) => {
   return response.data;
 };
 
-export const getAllProducts = async (page:number =1,limit:number=10) => {
-  const response = await API.get(`/products?page=${page}&limit=${limit}`);
+export const getAllProducts = async (page:number =1,limit:number=10,search:string="") => {
+  const response = await API.get(`/products?page=${page}&limit=${limit}&search=${search}`);
   return response.data;
 };
 

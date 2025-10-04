@@ -11,7 +11,7 @@ export default function Footer() {
         color: "white",
         textAlign: "center",
         py: 3,
-        mt: 6,
+      mt: "auto",
       }}
     >
       <Typography variant="body2">
@@ -20,3 +20,5 @@ export default function Footer() {
     </Box>
   );
 }
+
+

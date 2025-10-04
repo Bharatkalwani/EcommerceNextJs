@@ -2,15 +2,22 @@ import Header from "@/components/common/Header";
 import Footer from "@/components/common/Footer";
 
 
-export default function MainLayout(
-  { children }: Readonly<{
-    children: React.ReactNode;
-  }>) {
+export default function MainLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <html lang="en">
-      <Header></Header>
-            {children}
-            <Footer></Footer>
-    </html>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        minHeight: "100vh",
+      }}
+    >
+      <Header />
+      <main style={{ flex: 1 }}>{children}</main>
+      <Footer />
+    </div>
   );
 }
