@@ -49,6 +49,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       sx={{
         display: "flex",
         bgcolor: "#F4F4F4",
+         minHeight: "100vh", 
 
       }}>
       {/* Top Navbar */}

@@ -1,12 +1,11 @@
-export default function AuthLayout(
-  { children }: Readonly<{
-    children: React.ReactNode;
-  }>) {
+export default function AuthLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <html lang="en">
-      <body>
-          {children}
-      </body>
-    </html>
+    <div className="auth-layout"> 
+      {children}
+    </div>
   );
 }

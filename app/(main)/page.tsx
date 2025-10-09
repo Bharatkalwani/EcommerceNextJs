@@ -13,7 +13,6 @@ export default function HomePage() {
   const [search, setSearch] = useState<string>("")
   const [products, setProducts] = useState<Product[]>([]);
  const debouncedSearch = useDebounce(search, 500);
-  console.log()
   useEffect(() => {
     const fetchData = async () => {
       let getProducts = await getAllProducts(1, 20, debouncedSearch)

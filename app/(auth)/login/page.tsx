@@ -10,10 +10,15 @@ export default function page() {
     const [password, setPassword] = useState("")
     const router = useRouter();
 
-    const handleSubmit = async() => {
-        const data= await  loginUser({email,password})
-        console.log("data.token",data.token)
-       localStorage.setItem("token", data.token);
+    const handleSubmit = async () => {
+        const data = await loginUser({ email, password })
+        console.log("data.token", data.token)
+        if (data?.token) {
+            localStorage.setItem("token", data.token);
+            router.push("/");
+        } else {
+            console.error("No token received");
+        }
         router.push("/")
     }
 

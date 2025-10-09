@@ -15,7 +15,7 @@ const ProductCard = ({product}: {product:Product}) => {
         title="green iguana"
       />
       <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
+        <Typography  gutterBottom variant="h5" component="div">
         {product.name}
         </Typography>
         <Typography variant="body2" sx={{ color: 'text.secondary' }}>

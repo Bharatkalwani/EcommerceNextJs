@@ -4,21 +4,30 @@ import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { TextField, Button, Box, Typography } from "@mui/material";
 import { getProductById, updateProductById } from "@/lib/api";
+import { ProductFields } from '@/config/constant'
+import { Product } from '@/types/index'
+import CustomTextField from "@/shared/inputs/CustomInput";
 import toast from "react-hot-toast";
 
-// Example Product type (adjust fields as per your DB schema)
-interface Product {
-    id: number;
-    name: string;
-    price: number;
-    description: string;
-}
 
 export default function EditProductPage() {
     const { id } = useParams<{ id: string }>();
     const router = useRouter();
 
-    const [product, setProduct] = useState<Product | null>(null);
+   interface FormDataType {
+        name: string
+        price: number
+        stock: number
+        description: string
+    }
+
+    const [product, setProduct] = useState<FormDataType | null>({
+        name: "",
+        price: 0,
+        stock: 0,
+        description: "",
+    });
+
     const [loading, setLoading] = useState(true);
 
     // Fetch product by ID (replace with your API)
@@ -45,7 +54,7 @@ export default function EditProductPage() {
         );
     };
 
-    // Handle form submit
+    // Handle fo4rm submit
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         if (!product) return;
@@ -56,7 +65,6 @@ export default function EditProductPage() {
             toast.success("Product Updated!");
         } catch (err) {
             console.error("Update failed", err);
-            // alert("Failed to update product");
             toast.error("Failed to update product!");
         }
     };
@@ -65,46 +73,33 @@ export default function EditProductPage() {
     if (!product) return <p>Product not found.</p>;
 
     return (
-        <Box sx={{ maxWidth: 600, mx: "auto", mt: 4 }}>
+        <Box
+            component="form"
+            onSubmit={handleSubmit}
+            sx={{ maxWidth: 600, mx: "auto", mt: 4 }}>
             <Typography variant="h5" gutterBottom>
                 Edit Product
             </Typography>
 
-            <form onSubmit={handleSubmit}>
-                <TextField
-                    fullWidth
-                    margin="normal"
-                    label="Product Name"
-                    name="name"
-                    value={product.name}
-                    onChange={handleChange}
-                />
+            {
+                ProductFields.map((item, index) => (
+                    <CustomTextField
+                        key={item.name}
+                        required
+                        label={item.label}
+                        name={item.name}
+                        // value={formData[item.name as keyof FormDataType]} //type assertion
+                        onChange={handleChange}
+                        fieldType="text"
+                    />
+                ))
+            }
 
-                <TextField
-                    fullWidth
-                    margin="normal"
-                    label="Price"
-                    name="price"
-                    type="number"
-                    value={product.price}
-                    onChange={handleChange}
-                />
+            
 
-                <TextField
-                    fullWidth
-                    margin="normal"
-                    label="Description"
-                    name="description"
-                    multiline
-                    rows={4}
-                    value={product.description}
-                    onChange={handleChange}
-                />
-
-                <Button type="submit" variant="contained" color="primary" sx={{ mt: 2 }}>
-                    Update
-                </Button>
-            </form>
+            <Button type="submit" variant="contained" color="primary" sx={{ mt: 2 }}>
+                Update
+            </Button>
         </Box>
     );
 }

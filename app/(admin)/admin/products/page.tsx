@@ -37,7 +37,7 @@ export default function AdminProductsPage() {
 
   const handleAddProduct = () => {
     router.push("/admin/products/add")
-         toast.success("Product Added Successfully!");
+    toast.success("Product Added Successfully!");
   }
 
   const handleEdit = (id: number) => {
@@ -48,8 +48,8 @@ export default function AdminProductsPage() {
     if (!confirm("Are you sure you want to delete this product?")) return;
     await deleteProductById(id);
     setProducts((prev) => prev.filter((p) => p.id !== id));
-      //  toast.error("Product Deleted!");
-      toast.success("Product Deleted!");
+    //  toast.error("Product Deleted!");
+    toast.success("Product Deleted!");
   };
 
   const columns: GridColDef[] = [
@@ -100,7 +100,7 @@ export default function AdminProductsPage() {
         Add Product
       </Button>
 
-      <Paper sx={{ height: 400, width: '100%' }}>
+      <Box sx={{width: "100%", height: 500  }}>
         <DataGrid
           rows={products}
           columns={columns}
@@ -108,8 +108,9 @@ export default function AdminProductsPage() {
           checkboxSelection
           sx={{ border: 0 }}
         />
-      </Paper>
-      <Stack spacing={2} direction="row" justifyContent="center">
+
+      </Box>
+     <Stack spacing={2} direction="row" justifyContent="center" sx={{ mt: 2 }}>
         <Pagination
           count={Math.ceil(totalCount / pageSize)} // total pages
           page={page}
